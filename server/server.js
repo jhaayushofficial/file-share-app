@@ -2,14 +2,20 @@ import express from "express";
 import cors from "cors";
 import router from "./routes/routes.js";
 import DBconnection from "./database/db.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
-app.use(cors());
+const allowedOrigin = "https://file-share-app-sandy.vercel.app";
+app.use(cors({ origin: allowedOrigin }));
 
 app.use("/", router);
 DBconnection();
 
-app.listen(8000, () => {
-  console.log("Server is running on port 8000");
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
