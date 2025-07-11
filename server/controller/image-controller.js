@@ -11,9 +11,11 @@ export const uploadImage = async (req, res) => {
 
   try {
     const file = await File.create(fileObj);
+    const BASE_URL =
+      process.env.BASE_URL || "https://file-share-app-ntda.onrender.com";
     res.status(200).json({
       msg: "File uploaded succesfully",
-      path: `http://localhost:8000/file/${file._id}`,
+      path: `${BASE_URL}/file/${file._id}`,
     });
   } catch (error) {
     console.error(error.message);
